@@ -1,0 +1,7 @@
+VAR1 = VAL1
+
+ZOZOZO = ZUZUZU # comment
+
+
+#COmment mE
+
