@@ -1,68 +1,74 @@
 #include <Windows.h>
-#include <io.h>
-#include <fcntl.h>
 #include <iostream>
 #include <algorithm>
 #include "config_reader.hpp"
 #include "exceptions.hpp"
 #include <gl/GL.h>
 #include "wglext.h"
-#include "window_manager.hpp"
 #include "functions.hpp"
+#include "console.hpp"
+#include "window.hpp"
+
+void Run()
+{
+    
+
+
+    while (true) 
+    {
+    }
+}
+
+DWORD WINAPI RunInThread(LPVOID data)
+{
+    HWND *mainWindowHandle = (HWND *) data;
+    Run();
+    PostMessage(*mainWindowHandle, WM_CLOSE, 0, 0);
+    return 0;
+}
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int)
 {
-    // Create console and redirect stdout to it
-    AllocConsole();
-    HANDLE outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    int cOutHandle = _open_osfhandle((intptr_t) outHandle, _O_TEXT);
-    FILE *outFile = _fdopen(cOutHandle, "w");
-    *stdout = *outFile;
-
-    HANDLE inHandle = GetStdHandle(STD_INPUT_HANDLE);
-    int cInHandle = _open_osfhandle((intptr_t) inHandle, _O_TEXT);
-    FILE *inFile = _fdopen(cInHandle, "r");
-    *stdin = *inFile;
-
-    HANDLE errHandle = GetStdHandle(STD_ERROR_HANDLE);
-    int cErrHandle = _open_osfhandle((intptr_t) errHandle, _O_TEXT);
-    FILE *errFile = _fdopen(cErrHandle, "w");
-    *stderr = *errFile;
+    // Create a console, and redirect std streams there
+    Console *console = new Console();
+    Console::GetSingleton().RedirectStdHere();
 
     try
     {
-        //DWORD threadId;
-        //HANDLE threadHandle = CreateThread(
-        //    nullptr,
-        //    0,
-        //    Run,
-        //    nullptr,
-        //    0,
-        //    &threadId
-        //);
-        //if (!threadHandle)
-        //    throw WindowsException("CreateThread");
-
-        WindowMgr *windowMgr = new WindowMgr();
-        WindowMgr::GetSingleton().Init();
-
-        Window *dummyWindow = WindowMgr::GetSingleton().CreateNewWindow();
-        dummyWindow->Init(L"Dummy");
-        dummyWindow->CreateSimpleGlContext();
+        Window *dummyWindow = new Window(L"Dummy Window Class", L"Dummy Window");
+        dummyWindow->SetSimpleGlContext();
         LoadGlFunctions();
-        dummyWindow->Live();
+        delete dummyWindow;
 
-        Sleep(60000);
+        Window *mainWindow = new Window(L"Main Window Class", L"Main Window", true);
+        mainWindow->SetProperGlContext();
+
+        DWORD threadId;
+        HWND mainWindowHandle = mainWindow->GetHwnd();
+        HANDLE threadHandle = CreateThread(
+            NULL,
+            0,
+            RunInThread,
+            &mainWindowHandle,
+            0,
+            &threadId
+        );
+        if (!threadHandle)
+            throw WindowsException("CreateThread");
+
+        BOOL ret;
+        MSG msg;
+        while ((ret = GetMessage(&msg, NULL, 0, 0)))
+        {
+            if (ret == -1)
+                throw WindowsException("GetMessage");
+
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
 
 
-        //WindowMgr::GetSingleton().RemoveWindow(dummyWindow);
-
-        //Window *mainWindow = WindowMgr::GetSingleton().CreateNewWindow();
-        //mainWindow->Init(L"Real shit");
-        //mainWindow->CreateProperGlContext();
-
-
-        //delete windowMgr;
+        delete mainWindow;
 
     }
     catch (WindowsException &wex)
@@ -72,6 +78,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int)
         std::cin.get();
     }
 
+
+    delete console;
 
     //std::cin.get();
 

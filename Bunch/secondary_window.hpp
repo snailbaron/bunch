@@ -7,10 +7,10 @@ class SecondaryWindow : public BaseWindow<SecondaryWindow>
 {
     public:
         SecondaryWindow() : BaseWindow<SecondaryWindow>() {}
-        ~SecondaryWindow() {}
+        ~SecondaryWindow() { SetWindowLongPtr(m_hwnd, GWLP_USERDATA, NULL); }
 
         const wchar_t * GetWindowClassName() const { return L"Secondary Window Class"; }
-        LRESULT HandleMessage(UINT msg, WPARAM wparam, LPARAM lparam) { return DefWindowProc(m_hwnd, msg, wparam, lparam); }
+        LRESULT HandleMessage(UINT msg, WPARAM wparam, LPARAM lparam);
 
     private:
         SecondaryWindow(const SecondaryWindow &sw);

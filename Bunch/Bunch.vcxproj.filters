@@ -27,16 +27,19 @@
     <ClCompile Include="windows_exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window_manager.cpp">
+    <ClCompile Include="wrong_argument_exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wrong_argument_exception.cpp">
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="base_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,19 +65,22 @@
     <ClInclude Include="wglext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="functions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="window_manager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="singleton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="wrong_argument_exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base_window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

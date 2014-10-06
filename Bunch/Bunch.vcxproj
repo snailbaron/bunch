@@ -77,18 +77,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base_window.cpp" />
     <ClCompile Include="config_reader.cpp" />
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="open_file_exception.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="windows_exception.cpp" />
-    <ClCompile Include="window_manager.cpp" />
     <ClCompile Include="wrong_argument_exception.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base_window.hpp" />
     <ClInclude Include="config.hpp" />
     <ClInclude Include="config_reader.hpp" />
+    <ClInclude Include="console.hpp" />
     <ClInclude Include="exception.hpp" />
     <ClInclude Include="exceptions.hpp" />
     <ClInclude Include="functions.hpp" />
@@ -97,7 +100,6 @@
     <ClInclude Include="wglext.h" />
     <ClInclude Include="window.hpp" />
     <ClInclude Include="windows_exception.hpp" />
-    <ClInclude Include="window_manager.hpp" />
     <ClInclude Include="wrong_argument_exception.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
