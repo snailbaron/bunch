@@ -58,6 +58,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>perl scripts\pre-build.pl</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Running pre-build script</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -75,9 +81,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>perl scripts\pre-build.pl</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Running pre-build script</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="base_window.cpp" />
     <ClCompile Include="config_reader.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="functions.cpp" />
@@ -88,7 +99,6 @@
     <ClCompile Include="wrong_argument_exception.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base_window.hpp" />
     <ClInclude Include="config.hpp" />
     <ClInclude Include="config_reader.hpp" />
     <ClInclude Include="console.hpp" />
@@ -101,6 +111,9 @@
     <ClInclude Include="window.hpp" />
     <ClInclude Include="windows_exception.hpp" />
     <ClInclude Include="wrong_argument_exception.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configs\gl-functions.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

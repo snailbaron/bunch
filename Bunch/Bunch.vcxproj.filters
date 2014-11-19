@@ -36,9 +36,6 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="base_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,11 +74,11 @@
     <ClInclude Include="console.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="base_window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configs\gl-functions.txt" />
   </ItemGroup>
 </Project>

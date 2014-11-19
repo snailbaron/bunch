@@ -1,0 +1,4 @@
+wglChoosePixelFormatARB
+wglCreateContextAttribsARB
+glCreateProgram
+glCreateShader

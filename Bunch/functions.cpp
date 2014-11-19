@@ -1,15 +1,14 @@
 #include "functions.hpp"
 
-#define DECLARE_PROC(TYPE, NAME) TYPE NAME;
-#define GET_PROC_ADDR(TYPE, NAME) NAME = (TYPE) wglGetProcAddress(#NAME);
-
-DECLARE_PROC(PFNWGLCHOOSEPIXELFORMATARBPROC, wglChoosePixelFormatARB)
-DECLARE_PROC(PFNWGLCREATECONTEXTATTRIBSARBPROC, wglCreateContextAttribsARB)
-DECLARE_PROC(PFNGLCREATEPROGRAMPROC, glCreateProgram)
+PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB;
+PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB;
+PFNGLCREATEPROGRAMPROC glCreateProgram;
+PFNGLCREATESHADERPROC glCreateShader;
 
 void LoadGlFunctions()
 {
-    GET_PROC_ADDR(PFNWGLCHOOSEPIXELFORMATARBPROC, wglChoosePixelFormatARB)
-    GET_PROC_ADDR(PFNWGLCREATECONTEXTATTRIBSARBPROC, wglCreateContextAttribsARB)
-    GET_PROC_ADDR(PFNGLCREATEPROGRAMPROC, glCreateProgram)
+    wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC) wglGetProcAddress("wglChoosePixelFormatARB");
+    wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC) wglGetProcAddress("wglCreateContextAttribsARB");
+    glCreateProgram = (PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
+    glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
 }
